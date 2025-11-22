@@ -17,7 +17,7 @@ Everything here is for **educational purposes only** – expect messy code, half
 
 ### Tech Stack
 - .NET 8 (some folders still on .NET 6/7)
-- C# 12
+- C#
 - WPF (.NET)
 - RabbitMQ.Client (NuGet)
 - CommunityToolkit.Mvvm (for MVVM)
