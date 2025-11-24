@@ -36,6 +36,7 @@ namespace CSharp_RabbitMQ_Demo.ViewModels
 		[RelayCommand]
 		private async Task StartService()
 		{
+			// basic validations
 			if (IsReceiving)
 			{
 				OnMessageReceived(" [!] Already receiving.");
@@ -44,8 +45,8 @@ namespace CSharp_RabbitMQ_Demo.ViewModels
 
 			var hostName = string.IsNullOrWhiteSpace(Host) ? "localHost" : Host;
 			var qName = string.IsNullOrWhiteSpace(QueueName) ? "testQueue" : QueueName;
-			var user = string.IsNullOrWhiteSpace(UserName) ? "guest" : UserName; //add default user if needed
-			var pass = string.IsNullOrWhiteSpace(Password) ? "guest" : Password; //add default password if needed
+			var user = string.IsNullOrWhiteSpace(UserName) ? "devmq" : UserName; //add default user if needed
+			var pass = string.IsNullOrWhiteSpace(Password) ? "devmq" : Password; //add default password if needed
 
 			try
 			{
@@ -63,6 +64,37 @@ namespace CSharp_RabbitMQ_Demo.ViewModels
 				{
 					var body = ea.Body.ToArray();
 					var message = Encoding.UTF8.GetString(body);
+
+					// Check content type for potential formatting
+					string contentType = ea.BasicProperties.ContentType ?? "text/plain";
+
+					// If content type is JSON, attempt to format it
+					if (contentType == "application/json")
+					{
+						// Using System.Text.Json for formatting
+						/*try
+						{ 
+							var jsonObj = System.Text.Json.JsonDocument.Parse(message);
+							message = System.Text.Json.JsonSerializer.Serialize(jsonObj, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+						}
+						catch
+						{
+							// If parsing fails, keep original message
+						}*/
+
+						// Using Newtonsoft.Json for formatting
+						try
+						{
+							var jsonObj = Newtonsoft.Json.Linq.JObject.Parse(message);
+							message = jsonObj.ToString(Newtonsoft.Json.Formatting.Indented);
+						}
+						catch
+						{
+							// If parsing fails, keep original message
+						}
+					}
+
+					// Notify UI
 					OnMessageReceived($" [x] Received {message}");
 					return Task.CompletedTask;
 				};
