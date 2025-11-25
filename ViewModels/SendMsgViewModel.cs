@@ -41,8 +41,8 @@ namespace CSharp_RabbitMQ_Demo.ViewModels
 
 			var hostName = string.IsNullOrWhiteSpace(Host) ? "localHost" : Host;
 			var qName = string.IsNullOrWhiteSpace(QueueName) ? "testQueue" : QueueName;
-			var user = string.IsNullOrWhiteSpace(UserName) ? "devmq" : UserName; //add default user if needed
-			var pass = string.IsNullOrWhiteSpace(Password) ? "devmq" : Password; //add default password if needed
+			var user = string.IsNullOrWhiteSpace(UserName) ? "guest" : UserName; //add default user if needed
+			var pass = string.IsNullOrWhiteSpace(Password) ? "guest" : Password; //add default password if needed
 			var payload = string.Empty;
 
 			// Prepare payload
