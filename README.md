@@ -12,7 +12,7 @@ Everything here is for **educational purposes only** – expect messy code, half
 - Implementing clean MVVM in WPF
 - Async/await with RabbitMQ consumers
 - Using `RabbitMQ.Client` NuGet package
-- Sending and receiving complex objects (JSON serialization) -> **not yet used, but next on the list!**
+- Sending and receiving complex objects (JSON serialization)
 - Background message consumers that update the WPF UI safely
 
 ### Tech Stack
@@ -21,7 +21,7 @@ Everything here is for **educational purposes only** – expect messy code, half
 - WPF (.NET)
 - RabbitMQ.Client (NuGet)
 - CommunityToolkit.Mvvm (for MVVM)
-- JSON serialization -> **planning to implement** (will try both Newtonsoft.Json and System.Text.Json)
+- JSON serialization (both Newtonsoft.Json and System.Text.Json)
 - RabbitMQ server running on **Ubuntu 24.04 LTS** inside **VirtualBox**
 
 ### Local RabbitMQ Setup (for me and anyone cloning this)
